@@ -10,22 +10,24 @@ while True:
     print("0. Sair")
     escolha = input("Escolha uma opção (1-0): ")
 
-    if escolha == '1':
-        print("Abrindo novo chamado...")
-        sala = input("Sala: ")
-        problema = input("Problema: ")
-        prioridade = input("Prioridade (de 1 a 5): ")
-        registrar_chamado(sala, problema, prioridade)
+    match escolha:
 
-    elif escolha == '2':
-        consultar_chamados()
+        case 1:
+            print("Abrindo novo chamado...")
+            sala = input("Sala: ")
+            problema = input("Problema: ")
+            prioridade = input("Prioridade (de 1 a 5): ")
+            registrar_chamado(sala, problema, prioridade)
 
-    elif escolha == '3':
-        encerrar_chamado()
-        
-    elif escolha == '0':
-        print("Saindo...")
-        break
+        case 2:
+            consultar_chamados()
 
-    else:
-        print("Opção inválida.")
+        case 3:
+            encerrar_chamado()
+            
+        case 0:
+            print("Saindo...")
+            break
+
+        case _:
+            print("Opção inválida.")
