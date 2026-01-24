@@ -1,5 +1,5 @@
 # Simulação de um sistema de suporte técnico simples
-from chamados_funcoes import encerrar_chamado, consultar_chamados, registrar_chamado
+from chamados_funcoes import encerrar_chamado, consultar_chamados, registrar_chamado, exportar_chamados
 
 
 while True:
@@ -7,8 +7,9 @@ while True:
     print("1. Novo Chamado")
     print("2. Consultar Chamados")
     print("3. Encerrar Chamado")
+    print("4. Exportar Chamados")
     print("0. Sair")
-    escolha = input("Escolha uma opção (1-0): ")
+    escolha = int(input("Escolha uma opção (1-0): "))
 
     match escolha:
 
@@ -24,6 +25,15 @@ while True:
 
         case 3:
             encerrar_chamado()
+
+        case 4:
+            print("Selecione quais chamados deseja exportar:")
+            print("0. Todos os chamados")
+            print("1. Chamados abertos")
+            print("2. Chamados encerrados")
+            tipo_exportar = int(input("Escolha uma opção (0-2): "))
+
+            exportar_chamados(tipo_exportar)
             
         case 0:
             print("Saindo...")
