@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 def home(request):
     return HttpResponse("<h1>Hello World!</h1><p>Meu primeiro sistema Django está online.</p>")
@@ -9,14 +10,7 @@ chamados = [
 ]
 
 def listar(request):
-    # Lógica para listar os chamados em HTML
-    html = "<h1>🖥️ HelpDesk - Lista de Chamados</h1><hr>"
-    
-    for i, c in enumerate(chamados):
-        html += f"<p>ID: {i} | <b>{c['lab']}</b> - {c['problema']} ({c['prioridade']})</p>"
-    
-    html += "<br><a href='/novo/Lab02/Teclado/Alta/'>[Simular Novo Chamado]</a>"
-    return HttpResponse(html)
+    return render(request, "core/listar.html", {"chamados": chamados})
 
 def criar(request, lab, problema, prioridade):
     # Criando o dicionário e adicionando à lista
