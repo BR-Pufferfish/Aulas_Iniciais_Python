@@ -1,58 +1,39 @@
 {% extends "core/base.html" %}
 
-{% block title %}Home{% endblock %}
+{% block conteudo %}
+<main class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow border-0">
+                <div class="card-body p-5">
+                    <h2 class="text-secondary mb-4">Status do Sistema</h2>
 
-{% block content %}
-<div class="row justify-content-center">
-    <div class="col-12 col-lg-10">
-
-        <div class="card shadow-sm border-0 rounded-4">
-            <div class="card-body p-4 p-md-5">
-
-                <h2 class="fw-semibold mb-2">Bem-vindo ao Sistema de Chamados</h2>
-                <p class="text-muted mb-4">
-                    Utilize o menu superior para navegar entre as páginas do sistema.
-                </p>
-
-                <div class="row g-3">
-                    <div class="col-12 col-md-6">
-                        <div class="card border-0 bg-light rounded-4 h-100">
-                            <div class="card-body p-4">
-                                <h5 class="fw-semibold mb-2">Criar Chamado</h5>
-                                <p class="text-muted mb-3">
-                                    Abra um novo chamado informando laboratório, problema e prioridade.
-                                </p>
-                                <a href="http://127.0.0.1:8000/exibirNovoChamado" class="btn btn-primary btn-sm">
-                                    Acessar
-                                </a>
-                            </div>
+                    <div class="alert alert-success d-flex align-items-center" role="alert">
+                        <div>
+                            <strong>Sucesso!</strong> O servidor está rodando e os templates estão conectados.
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-6">
-                        <div class="card border-0 bg-light rounded-4 h-100">
-                            <div class="card-body p-4">
-                                <h5 class="fw-semibold mb-2">Listar Chamados</h5>
-                                <p class="text-muted mb-3">
-                                    Visualize todos os chamados já registrados no sistema.
-                                </p>
-                                <a href="http://127.0.0.1:8000/listar" class="btn btn-outline-primary btn-sm">
-                                    Acessar
-                                </a>
-                            </div>
-                        </div>
+                    <p class="text-muted">
+                        Este é um exemplo de como o <strong>MVT</strong> separa as coisas.
+                        O Python apenas enviou os dados, enquanto o HTML e CSS cuidam de toda a beleza que você está
+                        vendo.
+                    </p>
+
+                    <hr>
+
+                    <div class="d-grid gap-2 d-md-block">
+                        <a href="/" class="btn btn-primary btn-lg px-4">Atualizar Página</a>
+                        <a href="/listar" class="btn btn-outline-secondary btn-lg px-4">Lista de chamados</a>
+                        <a href="/novo-chamado" class="btn btn-outline-secondary btn-lg px-4">Novo chamado</a>
                     </div>
                 </div>
-
-                <hr class="my-4">
-
-                <p class="text-muted small mb-0">
-                    Sistema desenvolvido com Django + Bootstrap.
-                </p>
-
             </div>
         </div>
-
     </div>
-</div>
+</main>
+{% endblock %}
+
+{% block rodape %}
+
 {% endblock %}

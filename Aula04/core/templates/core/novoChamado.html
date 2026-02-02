@@ -1,50 +1,41 @@
-{% extends "core/base.html" %}
+{% extends 'core/base.html' %}
 
-{% block title %}Criar Chamado{% endblock %}
+{% block titulo %}
+Novo Chamado
+{% endblock %}
 
-{% block content %}
-<div class="row justify-content-center">
-    <div class="col-12 col-md-8 col-lg-6">
+{% block conteudo %}
+<div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Abertura de Chamado Técnico</h4>
+    </div>
+    <div class="card-body">
+        <form method="POST">
+            {% csrf_token %}
 
-        <div class="card shadow-sm border-0 rounded-4">
-            <div class="card-body p-4 p-md-5">
-
-                <h3 class="mb-4 text-center fw-semibold">Criar Chamado</h3>
-
-                <form method="POST">
-                    {% csrf_token %}
-
-                    <div class="mb-3">
-                        <label for="lab" class="form-label">Laboratório</label>
-                        <input type="text" id="lab" name="lab" class="form-control" placeholder="Ex: Lab 02">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="problema" class="form-label">Problema</label>
-                        <input type="text" id="problema" name="problema" class="form-control"
-                            placeholder="Descreva o problema">
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="prioridade" class="form-label">Prioridade</label>
-                        <select id="prioridade" name="prioridade" class="form-select">
-                            <option value="" selected disabled>Selecione a prioridade</option>
-                            <option value="baixa">Baixa</option>
-                            <option value="media">Média</option>
-                            <option value="alta">Alta</option>
-                        </select>
-                    </div>
-
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-primary btn-lg rounded-3">
-                            Criar Chamado
-                        </button>
-                    </div>
-                </form>
-
+            <div class="mb-3">
+                <label class="form-label fw-bold">Laboratório:</label>
+                <input type="text" name="laboratorio" class="form-control" placeholder="Ex: Laboratório 01" required>
             </div>
-        </div>
 
+            <div class="mb-3">
+                <label class="form-label fw-bold">Problema:</label>
+                <input type="text" name="problema" class="form-control" placeholder="Descreva o defeito" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Prioridade:</label>
+                <select name="prioridade" class="form-select">
+                    <option value="Baixa">Baixa</option>
+                    <option value="Média" selected>Média</option>
+                    <option value="Alta">Alta</option>
+                </select>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-success btn-lg">Salvar Chamado</button>
+            </div>
+        </form>
     </div>
 </div>
 {% endblock %}

@@ -2,63 +2,37 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpDesk | Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
 
-    <title>{% block title %}Sistema{% endblock %}</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        .hero-section {
+            background: linear-gradient(135deg, #6610f2, #0d6efd);
+            color: white;
+            padding: 60px 0;
+        }
+    </style>
 </head>
 
-<body class="bg-light">
-
-    <!-- NAVBAR / CABEÇALHO -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid px-4">
-            <a class="navbar-brand fw-semibold" href="http://127.0.0.1:8000/">
-                Sistema de Chamados
-            </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavbar"
-                aria-controls="menuNavbar" aria-expanded="false" aria-label="Alternar navegação">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="menuNavbar">
-                <div class="navbar-nav ms-auto gap-2">
-
-                    <!-- BOTÕES DE NAVEGAÇÃO -->
-                    <a class="btn btn-light btn-sm" href="#">
-                        Criar Chamado
-                    </a>
-
-                    <a class="btn btn-outline-light btn-sm" href="#">
-                        Listar Chamados
-                    </a>
-
-                    <a class="btn btn-outline-light btn-sm" href="#">
-                        Laboratórios
-                    </a>
-
-                    <a class="btn btn-outline-light btn-sm" href="#">
-                        Relatórios
-                    </a>
-
-                </div>
-            </div>
+<body>
+    <header class="hero-section text-center shadow-sm">
+        <div class="container">
+            <h1 class="display-3 fw-bold">Hello, Django! 🚀</h1>
+            <p class="lead">Seu sistema de HelpDesk agora tem uma interface moderna.</p>
         </div>
-    </nav>
+    </header>
+    {% block conteudo %}
 
-    <!-- CONTEÚDO DA PÁGINA -->
-    <main class="container py-5">
-        {% block content %}{% endblock %}
-    </main>
+    {% endblock %}
 
-    <!-- Bootstrap JS (para o botão do menu mobile funcionar) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-QrYl0n4t+zJfQpY0lZlqgqkQn3oGvX9o5rCk9y7cM8yJ4m9t8wVv1z7g0d6a2k8R"
-        crossorigin="anonymous"></script>
+    <footer class="text-center py-4 text-muted">
+        <small>&copy; 2026 - Curso Técnico de Desenvolvimento Web</small>
+    </footer>
 
 </body>
 

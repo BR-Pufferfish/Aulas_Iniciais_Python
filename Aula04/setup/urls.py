@@ -1,4 +1,3 @@
-
 """
 URL configuration for setup project.
 
@@ -17,14 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from core.views import home, listar, criar, fechar, novoChamado, baseHtml # Importamos a função que criamos
+from core.views import home, listar, novoChamado, fechar_chamado
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
     path('', home),  # Deixando vazio '', a página aparece na raiz do site
-    path('listar', listar), # Página inicial lista os chamados
-    path('novo/<str:lab>/<str:problema>/<str:prioridade>/', criar), # Rota dinâmica
-    path('fechar/<int:indice>', fechar), # Rota dinâmica
-    path('exibirNovoChamado', novoChamado),
-    path('base', baseHtml),
+    path('listar', listar),
+
+    path('novo-chamado', novoChamado),
+    path('fechar-chamado/<int:id>', fechar_chamado, name='fechar-chamado'),
 ]

@@ -1,58 +1,50 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+# from .models import Chamado
+from django.contrib.auth.decorators import login_required
 
-# Nossa lista global (Banco de Dados em memória)
 chamados = [
-    {"id": 1, "lab": "Lab 01", "problema": "PC lento", "prioridade": "Média"},
+    {"id": 1, "laboratorio": "Lab 01", "problema": "Computador não liga", "prioridade": "Alta", "data_criacao": "2024-01-10 14:30"},
+    {"id": 2, "laboratorio": "Lab 02", "problema": "Internet lenta", "prioridade": "Média", "data_criacao": "2024-01-11 09:15"},
+    {"id": 3, "laboratorio": "Lab 03", "problema": "Impressora sem tinta", "prioridade": "Baixa", "data_criacao": "2024-01-12 11:45"},
 ]
 
+
 def home(request):
-    return render(request, "core/home.html")
+    return render(request, "core/home.html" ) 
 
-def baseHtml(request):
-    return render(request, "core/base.html")
-
-def listar(request):
-    return render(request, "core/listar.html", {"chamados": chamados})
-
-
-def novoChamado(request, lab, problema, prioridade):
+#@login_required
+def novoChamado(request):
     if request.method == "POST":
-        print('Um request.POST:')
-        
-        novo = {
-        "id": len(chamados) + 1,
-        "lab": lab,
-        "problema": problema,
-        "prioridade": prioridade
-        }
-        chamados.append(novo)
+        laboratorio = request.POST.get('laboratorio')
+        problema = request.POST.get('problema')
+        prioridade = request.POST.get('prioridade')
 
+        print("chegou um post")
+        print(f"Laboratório: {laboratorio}, Descrição: {problema}")
+
+        # Chamado.objects.create(laboratorio=laboratorio, problema=problema, prioridade=prioridade)
+        
+       
         return redirect('/listar')
-
-        
 
     if request.method == "GET":
-        print('request.GET:', request.GET)
-        return redirect('/listar')
+        print("chegou um get")
+        return render(request, 'core/novo_chamado.html')
 
+# Ainda retorna HttpResponse
+def fechar_chamado(request, id):
+    # chamado = Chamado.objects.get(id=id)
+    # chamado.delete()
+    # print(f"Fechando chamado {chamado.id} - {chamado.problema}")
+    return HttpResponse(f"✅ Chamado removido com sucesso! <br> <a href='/listar'>Voltar</a>")
 
-# def novoChamado(request):
-#     return render(request, "core/novoChamado.html")
-
-def criar(request, lab, problema, prioridade):
-    # Criando o dicionário e adicionando à lista
-    novo = {
-        "id": len(chamados) + 1,
-        "lab": lab,
-        "problema": problema,
-        "prioridade": prioridade
-    }
-    chamados.append(novo)
-    
-    return HttpResponse(f"✅ Chamado para o {lab} criado com sucesso! <br> <a href='/'>Voltar</a>")
-
-def fechar(request, indice):
-    del chamados[indice]
+def fechar_chamado(request, id):
     
     return HttpResponse(f"✅ Chamado removido com sucesso! <br> <a href='/listar'>Voltar</a>")
+
+#@login_required
+def listar(request):
+    # Busca TODOS os registros do banco de dados
+    # chamados = Chamado.objects.all() 
+    return render(request, 'core/listar.html', {"chamados": chamados})
