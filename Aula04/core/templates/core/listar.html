@@ -6,7 +6,7 @@ Listar
 
 {% block conteudo %}
 <div class="container py-5">
-    <h1 class="text-primary mb-4">Lista de Chamados</h1>
+    <h1 class="text-primary mb-4">Chamados</h1>
 
     <table class="table table-striped table-hover shadow-sm bg-white">
         <thead class="table-dark">
@@ -15,6 +15,7 @@ Listar
                 <th>Problema</th>
                 <th>Prioridade</th>
                 <th>Ação</th>
+                <!-- <th>Status</th> -->
             </tr>
         </thead>
         <tbody>
@@ -31,6 +32,7 @@ Listar
                     <span class="badge bg-primary">{{ chamado.prioridade }}</span>
                     {% endif %}
                 </td>
+                <!-- <td>{{ chamado.status }}</td> -->
                 <td>
                     <a href="{% url 'fechar-chamado' chamado.id %}" class="btn btn-danger btn-sm"
                         onclick="return confirm('Tem certeza que deseja apagar?')">

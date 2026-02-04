@@ -6,8 +6,34 @@ Listar Atendentes
 
 {% block conteudo %}
 <div class="container py-5">
-    <h1 class="text-primary mb-4">Lista de Chamados</h1>
+    <h1 class="text-primary mb-4">Atendentes</h1>
 
+    <!-- FORMULÁRIO PARA CADASTRAR NOVO ATENDENTE -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="card-title mb-3">Cadastrar Novo atendente</h5>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome do Atendente</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="nome"
+                        name="nome"
+                        placeholder="Digite o nome"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn btn-primary"> Cadastrar </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TABELA -->
     <table class="table table-striped table-hover shadow-sm bg-white">
         <thead class="table-dark">
             <tr>
@@ -20,6 +46,10 @@ Listar Atendentes
             <tr>
                 <td>{{ atendente.id }}</td>
                 <td>{{ atendente.nome }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2" class="text-center">Nenhum atendente cadastrado.</td>
             </tr>
             {% endfor %}
         </tbody>
