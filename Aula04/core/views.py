@@ -1,57 +1,82 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-# from .models import Chamado
-from django.contrib.auth.decorators import login_required
 
+
+# Nossa lista global (Banco de Dados em memória)
 chamados = [
-    {"id": 1, "laboratorio": "Lab 01", "problema": "Computador não liga", "prioridade": "Alta", "data_criacao": "2024-01-10 14:30"},
-    {"id": 2, "laboratorio": "Lab 02", "problema": "Internet lenta", "prioridade": "Média", "data_criacao": "2024-01-11 09:15"},
-    {"id": 3, "laboratorio": "Lab 03", "problema": "Impressora sem tinta", "prioridade": "Baixa", "data_criacao": "2024-01-12 11:45"},
+    {"id": 1, "laboratorio": "Lab 01", "descricao": "PC lento", "prioridade": "Alta"},
+    {"id": 2, "laboratorio": "Lab 02", "descricao": "Impressora sem tinta", "prioridade": "Média"},
+    {"id": 3, "laboratorio": "Lab 03", "descricao": "Sem conexão com a internet", "prioridade": "Baixa"},
 ]
 
-atendentes = [
-    {"id": 1, "nome": "Ana Carolina Machado"},
-    {"id": 2, "nome": "Marcelo"},
+# Novas listas globais para categorias
+categorias = [
+    {"id": 1, "nome": "Hardware"},
+    {"id": 2, "nome": "Software"},
+    {"id": 3, "nome": "Rede"},
 ]
-
 
 def home(request):
-    return render(request, "core/home.html" ) 
+    return render(request, 'core/home.html')
 
-#@login_required
-def novo_chamado(request):
+def novo_chamado(request): 
+    # 1. Se o usuário clicou no botão de enviar (POST)
     if request.method == "POST":
+        # Capturamos os dados do formulário
         laboratorio = request.POST.get('laboratorio')
-        problema = request.POST.get('problema')
+        descricao = request.POST.get('descricao')
         prioridade = request.POST.get('prioridade')
+        # Salvamos na nossa "base de dados"
+        print(f"Recebido: {laboratorio}, {descricao}, {prioridade}") 
 
-        print("chegou um post")
-        print(f"Laboratório: {laboratorio}, Descrição: {problema}")
+        chamados.append({
+            "id": len(chamados) + 1,
+            "laboratorio": laboratorio,
+            "descricao": descricao,
+            "prioridade": prioridade
+        })
 
-        # Chamado.objects.create(laboratorio=laboratorio, problema=problema, prioridade=prioridade)
-        
-       
-        return redirect('/listar')
+        # 2. Redireciona de volta para a lista após salvar
+        return redirect('/listar-chamados')
 
-    if request.method == "GET":
-        print("chegou um get")
-        return render(request, 'core/novo_chamado.html')
+    # 3. Se o usuário apenas acessou a página (GET)
+    return render(request, 'core/novo_chamado.html')
+   
 
+def fechar(request, id):
+    for chamado in chamados:
+        if chamado["id"] == id:
+            chamados.remove(chamado)
+            break
+    
+    return redirect('/listar-chamados')
 
-# Ainda retorna HttpResponse
-def fechar_chamado(request, id):
-    # chamado = Chamado.objects.get(id=id)
-    # chamado.delete()
-    # print(f"Fechando chamado {chamado.id} - {chamado.problema}")
-    return HttpResponse(f"✅ Chamado removido com sucesso! <br> <a href='/listar'>Voltar</a>")
-
-
-#@login_required
-def listar(request):
-    # Busca TODOS os registros do banco de dados
-    # chamados = Chamado.objects.all() 
-    return render(request, 'core/listar.html', {"chamados": chamados})
+def listar_chamados(request):
+    return render(request, 'core/listar_chamados.html', {"chamados": chamados})
 
 
-def listar_atendentes (request):
-    return render(request, 'core/listar_atendentes.html', {"atendentes": atendentes})
+
+
+# Novas views para categorias
+
+def listar_categorias(request):
+    print("Listando categorias:", categorias)  # Debug: Verificar o conteúdo de categorias
+    return render(request, 'core/listar_categorias.html', {"categorias": categorias})
+
+def nova_categoria(request):
+    if request.method == "POST":
+        nome = request.POST.get('nome')
+        categorias.append({
+            "id": len(categorias) + 1,
+            "nome": nome
+        })
+        # salvar meus dados
+        return redirect('/listar-categorias')
+    return render(request, 'core/nova_categoria.html')
+
+def excluir_categoria(request, id):
+    for categoria in categorias:
+        if categoria["id"] == id:
+            categorias.remove(categoria)
+            break
+    return redirect('/listar-categorias')
