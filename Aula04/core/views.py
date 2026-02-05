@@ -1,13 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
+from Aula04.core.models import Chamado
+
 
 # Nossa lista global (Banco de Dados em memória)
-chamados = [
-    {"id": 1, "laboratorio": "Lab 01", "descricao": "PC lento", "prioridade": "Alta"},
-    {"id": 2, "laboratorio": "Lab 02", "descricao": "Impressora sem tinta", "prioridade": "Média"},
-    {"id": 3, "laboratorio": "Lab 03", "descricao": "Sem conexão com a internet", "prioridade": "Baixa"},
-]
 
 # Novas listas globais para categorias
 categorias = [
@@ -29,12 +26,15 @@ def novo_chamado(request):
         # Salvamos na nossa "base de dados"
         print(f"Recebido: {laboratorio}, {descricao}, {prioridade}") 
 
-        chamados.append({
-            "id": len(chamados) + 1,
-            "laboratorio": laboratorio,
-            "descricao": descricao,
-            "prioridade": prioridade
-        })
+
+        Chamado.objects.create(laboratorio=laboratorio, problema=descricao, prioridade=prioridade)
+
+        # chamados.append({
+        #     "id": len(chamados) + 1,
+        #     "laboratorio": laboratorio,
+        #     "descricao": descricao,
+        #     "prioridade": prioridade
+        # })
 
         # 2. Redireciona de volta para a lista após salvar
         return redirect('/listar-chamados')
