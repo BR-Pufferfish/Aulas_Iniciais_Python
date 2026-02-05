@@ -1,6 +1,7 @@
 {% extends "core/base.html" %}
 
-{% block conteudo %}
+
+{% block content %}
 <main class="container my-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -23,11 +24,18 @@
                     <hr>
 
                     <div class="d-grid gap-2 d-md-block">
-                        <a href="/" class="btn btn-primary btn-lg px-4">Atualizar Página</a>
+                        <a href="/listar-chamados" class="btn btn-outline-secondary btn-lg px-4">Lista de chamados</a>
+                        <a href="/novo-chamado" class="btn btn-outline-secondary btn-lg px-4">Novo chamado</a>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-block mt-3">
+                        <a href="/listar-categorias" class="btn btn-outline-primary btn-lg px-4">Lista de categorias</a>
+                        <a href="/nova-categoria" class="btn btn-outline-primary btn-lg px-4">Nova categoria</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
+
 {% endblock %}

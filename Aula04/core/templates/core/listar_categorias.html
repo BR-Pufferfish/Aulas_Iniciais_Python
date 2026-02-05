@@ -1,12 +1,12 @@
 {% extends "core/base.html" %}
 
-{% block conteudo %}
+{% block content %}
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Categoria</th>
-            <th scope="col">Ações</th>
+            <th scope="col">#</th>
+            <th scope="col">nome</th>
+            <th scope="col">ações</th>
         </tr>
     </thead>
     <tbody>
@@ -16,7 +16,6 @@
             <td>{{ categoria.nome }}</td>
             <td>
                 <a href="{% url 'excluir-categoria' categoria.id %}" class="btn btn-danger btn-sm">Excluir</a>
-            </td>
         </tr>
         {% endfor %}
     </tbody>
