@@ -15,7 +15,9 @@
             <th>{{ categoria.id }}</th>
             <td>{{ categoria.nome }}</td>
             <td>
+                <a href="{% url 'editar-categoria' categoria.id %}" class="btn btn-warning btn-sm">Editar</a>
                 <a href="{% url 'excluir-categoria' categoria.id %}" class="btn btn-danger btn-sm">Excluir</a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
