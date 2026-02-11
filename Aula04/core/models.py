@@ -62,11 +62,11 @@ class Pessoa(models.Model):
 class Chamado(models.Model):
 
     Categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
-    Equipamentos = models.ForeignKey(Equipamentos, on_delete=models.SET_NULL, null=True)
-    Pessoa = models.ForeignKey(Pessoa, on_delete=models.SET_NULL, null=True)
+    # Equipamentos = models.ForeignKey(Equipamentos, on_delete=models.SET_NULL, null=True)
+    # Pessoa = models.ForeignKey(Pessoa, on_delete=models.SET_NULL, null=True)
 
     laboratorio = models.CharField(max_length=100)
-    problema = models.TextField()
+    descricao = models.TextField()
     OPCOES_PRIORIDADE = [
         ('Baixa', 'Baixa'),
         ('Média', 'Média'),
