@@ -1,3 +1,4 @@
+
 """
 URL configuration for setup project.
 
@@ -16,21 +17,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from core.views import home
-from core.views import listar_chamados, novo_chamado, fechar_chamado
-from core.views import listar_categorias, nova_categoria, excluir_categoria, editar_categoria
-
+from core.views import home, listar_chamados, novo_chamado, fechar_chamado, editar_chamado
+from core.views import editar_categoria
+from core.views import ListarCategoriasView, NovaCategoriaView, ExcluirCategoriaView
+from core.views import api_chamados
 urlpatterns = [
+    # Exemplo de uso com FBV (Function Based View)
     path('admin/', admin.site.urls),
-    
-
     path('', home),  # Deixando vazio '', a página aparece na raiz do site
-    path('listar-chamados', listar_chamados),
-    path('novo-chamado', novo_chamado),
-    path('fechar/<int:id>', fechar_chamado, name='fechar-chamado'),
 
-    path('listar-categorias', listar_categorias),
-    path('nova-categoria', nova_categoria),
-    path('exclur-categoria/<int:id>', excluir_categoria, name='excluir-categoria'),
+    path('listar-chamados/', listar_chamados, name='listar-chamados'),
+    path('editar-chamado/<int:id>', editar_chamado, name='editar-chamado'),
+    path('novo-chamado/', novo_chamado),
+    path('fechar-chamado/<int:id>', fechar_chamado, name='fechar-chamado'),
+ 
     path('editar-categoria/<int:id>', editar_categoria, name='editar-categoria'),
+
+    # Exemplo de uso com CBV (class based view)
+    path('listar-categorias', ListarCategoriasView.as_view(), name='listar-categorias'),
+    path('nova-categoria', NovaCategoriaView.as_view(), name='nova-categoria'),
+    path('excluir-categoria/<int:pk>', ExcluirCategoriaView.as_view(), name='excluir-categoria'),
+
+    path('api/chamados/', api_chamados, name='listar-chamados-api'),
 ]

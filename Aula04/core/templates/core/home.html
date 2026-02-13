@@ -20,10 +20,29 @@
                         O Python apenas enviou os dados, enquanto o HTML e CSS cuidam de toda a beleza que você está
                         vendo.
                     </p>
+
+                    <hr>
+
+                    <div class="d-grid gap-2 d-md-block">
+                        <a href="/listar-chamados" class="btn btn-outline-secondary btn-lg px-4">Lista de chamados</a>
+                        <a href="/novo-chamado" class="btn btn-outline-secondary btn-lg px-4">Novo chamado</a>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-block mt-3">
+                        <a href="/listar-categorias" class="btn btn-outline-primary btn-lg px-4">Lista de categorias</a>
+                        <a href="/nova-categoria" class="btn btn-outline-primary btn-lg px-4">Nova categoria</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
 
+{% endblock %}
+
+
+{% block rodape %}
+<div class="text-center py-4 text-muted">
+    <small>&copy; 2026 - Curso Técnico de Desenvolvimento Web - Rodapé Personalizado</small>
+</div>
 {% endblock %}
